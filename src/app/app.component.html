@@ -1,0 +1,91 @@
+<h2>Forms</h2>
+
+<form [formGroup]="formModel"
+      (ngSubmit)="onSubmit()"
+      #formDir = "ngForm">
+
+    <div [hidden]="!formDir.submitted" class="info">
+      <p>FirstName: {{ formModel.get('firstName').value }}</p>
+      <p>Age: {{ formModel.get('age').value }}</p>
+      <p>Birthday: {{ formModel.get('birthday').value }}</p>
+      <p>DateOfLogin: {{ formModel.get('dateLogin').value }}</p>
+      <p>DateOfNitification: {{ formModel.get('dateNotification').value }}</p>
+    </div>
+
+  <main [hidden]="formDir.submitted">
+    <div class="input">
+      <input type="text"
+            formControlName="firstName" 
+            placeholder=" ">
+
+      <span class="icon"></span>
+      <label>First name</label>
+
+      <div *ngIf=" formModel.get('firstName').errors?.name && formModel.get('firstName').dirty" class='errors'>
+        Enter one or two words for camel case sensitive
+      </div>
+    </div>
+      
+    <div>
+      <input type="text" 
+            formControlName="age"
+            placeholder=" " >
+
+      <span class="icon"></span>
+      <label>Age</label>
+
+      <div *ngIf="formModel.get('age').errors && formModel.get('age').dirty" class='errors'>
+        Your age should be between 18 and 65!
+      </div>
+      <div *ngIf="formModel.get('age').errors?.isNaN && formModel.get('age').dirty" class='errors'>
+        Wrong data type!
+      </div>
+    </div>
+
+    <div>
+      <input type="text"  
+            formControlName="birthday"
+            placeholder=" " >
+
+      <span class="icon"></span>
+      <label>Birthday</label>
+
+      <div *ngIf=" formModel.get('birthday').errors && formModel.get('birthday').dirty" class='errors'>
+        String not match format YYYY/MM/DD
+      </div>
+    </div>
+
+    <div>
+      <input type="text"  
+            formControlName="dateLogin"
+            placeholder=" " >
+
+      <span class="icon"></span>
+      <label>Date of login</label>
+
+      <div *ngIf=" formModel.get('dateLogin').errors && formModel.get('dateLogin').dirty" class='errors'>
+        String not match format DD MMMM YYYY
+      </div>
+    </div>
+
+    <div>
+      <input type="text"  
+            formControlName="dateNotification"
+            placeholder=" " >
+
+      <span class="icon"></span>
+      <label>Date of notification</label>
+
+      <div *ngIf=" formModel.get('dateNotification').errors && formModel.get('dateNotification').dirty" class='errors'>
+        String not match format DD-MMM-YY
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="!formModel.valid">Submit</button>
+  </main>
+
+</form>
+
+<span ng-non-bindable>{{currentTime | date:'yyyy/mm/dd'}}</span><br>
+<span >{{currentTime | date:'dd mm yyyy'}}</span><br>
+<span ng-non-bindable>{{currentTime | date:'dd-mm-yyy'}}</span>
