@@ -1,0 +1,25 @@
+<nav>
+    <label>
+    {{ 'HOME.SELECT' | translate }}
+    <select #langSelect (change)="translate.use(langSelect.value)">
+      <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+    </select>
+  </label>
+  <a routerLink="/user-info" routerLinkcative="active" class="profile">{{ 'HOME.Profile' | translate }}</a>
+  <a routerLink="/user-edit" routerLinkcative="active" class="profile">{{ 'HOME.EditProfile' | translate }}</a>
+  
+  <ng-container *ngIf='(isLogged);then logoutBtn; else loginBtn'></ng-container>
+  <ng-template #logoutBtn>
+    <a (click)="logout()">{{ 'HOME.Logout' | translate }}</a>
+  </ng-template>
+
+  <ng-template #loginBtn>
+    <a routerLink="/login" routerLinkActive="active">{{ 'HOME.Login' | translate }}</a>
+  </ng-template>
+  
+</nav>
+<router-outlet></router-outlet>
+<ng-container *ngIf='isLoading; then loading'></ng-container>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

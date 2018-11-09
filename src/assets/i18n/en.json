@@ -1,0 +1,9 @@
+{
+  "HOME": {
+    "SELECT": "Change language",
+    "Login": "Login",
+    "Logout": "Logout",
+    "Profile": "Profile",
+    "EditProfile": "Edit profile"
+  }
+}

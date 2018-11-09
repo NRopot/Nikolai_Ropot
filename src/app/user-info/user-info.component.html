@@ -1,0 +1,36 @@
+<ng-container *ngIf="user; then userInfo"></ng-container>
+
+<ng-template #userInfo>
+<h2>My profile</h2>
+
+  <form [formGroup]="formModel"
+      (ngSubmit)="onSubmit()">
+
+    <div class="input">
+      <input readonly type="text"  formControlName="username" >
+      <label>First name</label>
+    </div>
+
+    <div>
+      <input readonly type="text" formControlName="birthday"  >
+      <label>Birthday</label>
+    </div>
+
+    <div>
+      <input readonly type="text"  formControlName="dateLogin" >
+      <label>Date of login</label>
+    </div>
+
+    <div>
+      <input readonly type="text" formControlName="dateNotification">
+      <label>Date of notification</label>
+    </div>
+
+    <div>
+      <input readonly type="text" formControlName="information" >
+      <label>Information</label>
+    </div>
+
+    <button routerLink="/user-edit">Edit profile</button>
+</form>
+</ng-template>

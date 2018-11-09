@@ -1,0 +1,31 @@
+<h2>Login</h2>
+
+<form [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()">
+
+  <div class="input">
+    <input type="text" 
+          formControlName="username" 
+          placeholder=" ">
+
+    <span class="icon"></span>
+    <label>User name</label>
+  </div>
+
+  <div class="input" >
+    <input type="password" placeholder=" " formControlName="password">
+
+    <span class="icon"></span>
+    <label>Password</label>
+  </div>
+    
+  <div class="input" >
+    <input type="password" placeholder=" " formControlName="pconfirm">
+
+    <span class="icon"></span>
+    <label>Password confirm</label>
+  </div>
+
+  <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  <button routerLink="/forgot-password">Forgot password</button>
+</form>

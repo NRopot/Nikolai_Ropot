@@ -1,0 +1,72 @@
+<h2> Edit profile</h2>
+
+<form [formGroup]="formModel"
+      (ngSubmit)="onSubmit()">
+
+  <div class="input">
+    <input type="text" 
+          formControlName="username" 
+          placeholder=" ">
+
+    <span class="icon"></span>
+    <label>First name</label>
+
+    <div *ngIf=" formModel.get('username').errors && formModel.get('username').dirty" class='errors'>
+      Enter one or two words for camel case sensitive
+    </div>
+  </div>
+
+  <div>
+    <input type="text"  
+          formControlName="birthday"
+          placeholder=" " >
+
+    <span class="icon"></span>
+    <label>Birthday</label>
+
+    <div *ngIf=" formModel.get('birthday').errors && formModel.get('birthday').dirty" class='errors'>
+      String not match format YYYY/MM/DD
+    </div>
+  </div>
+
+  <div>
+    <input type="text"  
+          formControlName="dateLogin"
+          placeholder=" " >
+
+    <span class="icon"></span>
+    <label>Date of login</label>
+
+    <div *ngIf=" formModel.get('dateLogin').errors && formModel.get('dateLogin').dirty" class='errors'>
+      String not match format DD MMMM YYYY
+    </div>
+  </div>
+
+  <div>
+    <input type="text"  
+          formControlName="dateNotification"
+          placeholder=" " >
+
+    <span class="icon"></span>
+    <label>Date of notification</label>
+
+    <div *ngIf=" formModel.get('dateNotification').errors && formModel.get('dateNotification').dirty" class='errors'>
+      String not match format DD-MMM-YY
+    </div>
+  </div>
+
+  <div>
+    <input type="text"  
+          formControlName="information"
+          placeholder=" " >
+
+    <span class="icon"></span>
+    <label>Information</label>
+
+    <div *ngIf=" formModel.get('information').errors && formModel.get('information').dirty" class='errors'>
+      String not match format DD-MMM-YY
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!formModel.valid">Save</button>
+</form>
