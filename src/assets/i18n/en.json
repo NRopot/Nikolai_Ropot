@@ -4,6 +4,10 @@
     "Login": "Login",
     "Logout": "Logout",
     "Profile": "Profile",
-    "EditProfile": "Edit profile"
+    "EditProfile": "Edit profile",
+    "Username":"User name",
+    "Password":"Password",
+    "Cpassword":"Password confirm",
+    "Forgot":"Forgot password"
   }
 }

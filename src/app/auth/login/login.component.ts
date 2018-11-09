@@ -9,6 +9,9 @@ import {  nameValidator } from '../../validators';
 import { UserLogin, User } from '../../interfaces';
 import { Router, NavigationExtras } from '@angular/router';
 import * as moment from 'moment';
+import { of, Observable } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +23,7 @@ export class LoginComponent implements OnInit {
   user: UserLogin = { name: '', password: '' };
 
   constructor(
+    public translate: TranslateService,
     public router: Router,
     private fb: FormBuilder,
     private http: HttpService,
@@ -32,24 +36,23 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       'username':['',[],nameValidator],
       'password': ['', Validators.required],
-      'pconfirm':['', [Validators.required] ]
+      'pconfirm':['', [Validators.required],this.passValidator() ]
     });
   }
 
   passValidator(  ):ValidatorFn{
-    return ( {value}: AbstractControl)=>{
-      console.log( this.loginForm);
+    return ( {value}: AbstractControl):Observable<boolean |{}>=>{
       const passValue = this.loginForm.value.password;
       const pconfirmValue = value;
       if(passValue && pconfirmValue){
         const valid = passValue === pconfirmValue;
-        return valid ? null : { errors:{
+        return of(valid ? null : { errors:{
           password: true ,
           passwordValue: passValue,
           pconfirmValue: pconfirmValue
-        } };
+        } }).pipe(delay(100));
       }else{
-        return {password:false};
+        return of({password:false}).pipe(delay(100));
       }
     };
       
@@ -78,7 +81,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.user.name = this.loginForm.get('username').value;
-      this.user.password = this.loginForm.get('passwords').get('password').value;
+      this.user.password = this.loginForm.get('password').value;
       this.login(this.user);
     }
   }

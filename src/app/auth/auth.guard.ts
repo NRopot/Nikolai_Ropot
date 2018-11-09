@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -6,9 +6,10 @@ import { HttpService } from '../http.service';
 import { UserService } from '../user.service';
 import { map, delay,  } from 'rxjs/operators';
 import * as moment from 'moment';
+import { AppComponent } from '../app.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn:'root'
 })
 export class AuthGuard implements CanActivate {
   isLogged:boolean;
@@ -25,6 +26,8 @@ export class AuthGuard implements CanActivate {
         val.firstLogin = moment(val.firstLogin).format("DD MMMM YYYY").toString();
         val.notifyDate = moment(val.notifyDate).format("DD-MMM-YY").toString();
         this.userService.setUser(val);
+        
+        
         this.router.navigate(['/user-info']); 
       }
     });
@@ -33,9 +36,6 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
-   
-    
-    
     if(this.userService.getUser()){
       this.router.navigate(['/user-info']);
       return of(false) ;

@@ -1,4 +1,4 @@
-<h2>Login</h2>
+<h2>{{ 'HOME.Login' | translate }}</h2>
 
 <form [formGroup]="loginForm"
       (ngSubmit)="onSubmit()">
@@ -9,23 +9,23 @@
           placeholder=" ">
 
     <span class="icon"></span>
-    <label>User name</label>
+    <label>{{'HOME.Username' | translate}}</label>
   </div>
 
   <div class="input" >
     <input type="password" placeholder=" " formControlName="password">
 
     <span class="icon"></span>
-    <label>Password</label>
+    <label>{{'HOME.Password' | translate}}</label>
   </div>
     
   <div class="input" >
     <input type="password" placeholder=" " formControlName="pconfirm">
 
     <span class="icon"></span>
-    <label>Password confirm</label>
+    <label>{{ 'HOME.Cpassword' | translate }}</label>
   </div>
 
-  <button type="submit" [disabled]="!loginForm.valid">Login</button>
-  <button routerLink="/forgot-password">Forgot password</button>
+  <button type="submit" [disabled]="!loginForm.valid">{{ 'HOME.Login' | translate }}</button>
+  <button routerLink="/forgot-password">{{ 'HOME.Forgot' | translate }}</button>
 </form>

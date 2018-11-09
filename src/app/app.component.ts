@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
     
     this.router.navigate(['/login']);
   }
-  setLogged(logged:boolean) {
+  public setLogged(logged:boolean) {
     this.isLogged = logged;
   }
   
